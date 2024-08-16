@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = [
+    "hello-rs",
+]
+
+
+[workspace.package]
+edition = "2021"
+authors = [""]
+license = ""
+homepage = "https://example.com/"
+repository = "https://git.example.com"
+readme = "README.md"
+documentation = "https://example.com/docs"
+
+[workspace.dependencies]
+
+[workspace.lints.clippy]
