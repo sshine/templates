@@ -5,7 +5,7 @@
     templates = {
       rust-simple = {
         path = ./rust-simple;
-        description = "A simple Rust flake";
+        description = "A simple Rust flake with a devShell";
       };
     };
   };
