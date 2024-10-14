@@ -2,15 +2,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay.url = "github:oxalica/rust-overlay";
   };
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (
       system:
         let
-          pkgs = import nixpkgs {
-            inherit system;
-          };
+          overlays = [ (import rust-overlay) ];
+          pkgs = import nixpkgs { inherit system overlays; };
 
           rustPlatform = pkgs.makeRustPlatform { };
 
@@ -28,7 +28,7 @@
             ];
           };
 
-          packages.default = rustPlatform.buildRustPackage {
+          packages.${system}.default = rustPlatform.buildRustPackage {
             pname = hello-rs.package.name;
             version = hello-rs.package.version;
             src = ./hello-rs;
